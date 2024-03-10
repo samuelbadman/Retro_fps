@@ -108,8 +108,8 @@ xcopy "$(ProjectDir)Shaders/binary" "$(TargetDir)Shaders/binary" /E /I /Y</Comma
   <ItemGroup>
     <ClCompile Include="Source\Audio\Audio.cpp" />
     <ClCompile Include="Source\Audio\SoundSourceVoice.cpp" />
-    <ClCompile Include="Source\Binary\Binary.cpp" />
-    <ClCompile Include="Source\Binary\BinaryBuffer.cpp" />
+    <ClCompile Include="Source\BinarySystem\Binary.cpp" />
+    <ClCompile Include="Source\BinarySystem\BinaryBuffer.cpp" />
     <ClCompile Include="Source\Console.cpp" />
     <ClCompile Include="Source\EventSystem\EventSystem.cpp" />
     <ClCompile Include="Source\Game\Billboard.cpp" />
