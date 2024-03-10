@@ -1,5 +1,7 @@
 # Retro first person shooter game
 
+<img src="ReadmeContent/RetroFPSScreenshot.png" alt="Retro fps screenshot" width="480" height="270"><br>
+
 This repository contains the game source code and Visual Studio solution.
 
 ## Highlights
