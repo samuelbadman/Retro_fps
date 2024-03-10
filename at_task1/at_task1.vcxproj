@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{97e12b85-937e-4e2a-9682-f70c0bc19f0e}</ProjectGuid>
+    <RootNamespace>attask1</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)Binary\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(Platform)-$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Binary\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(Platform)-$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(ProjectDir)Vulkan_1.2.189.2\Include\</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>xaudio2.lib;XInput.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir);$(ProjectDir)Vulkan_1.2.189.2\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)Assets" "$(TargetDir)Assets" /E /I /Y
+call $(ProjectDir)Shaders/CompileShaders.bat $(ProjectDir)Shaders\
+xcopy "$(ProjectDir)Shaders/binary" "$(TargetDir)Shaders/binary" /E /I /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(ProjectDir)Vulkan_1.2.189.2\Include\</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>xaudio2.lib;XInput.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir);$(ProjectDir)Vulkan_1.2.189.2\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)Assets" "$(TargetDir)Assets" /E /I /Y
+call $(ProjectDir)Shaders/CompileShaders.bat $(ProjectDir)Shaders\
+xcopy "$(ProjectDir)Shaders/binary" "$(TargetDir)Shaders/binary" /E /I /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Audio\Audio.cpp" />
+    <ClCompile Include="Source\Audio\SoundSourceVoice.cpp" />
+    <ClCompile Include="Source\Binary\Binary.cpp" />
+    <ClCompile Include="Source\Binary\BinaryBuffer.cpp" />
+    <ClCompile Include="Source\Console.cpp" />
+    <ClCompile Include="Source\EventSystem\EventSystem.cpp" />
+    <ClCompile Include="Source\Game\Billboard.cpp" />
+    <ClCompile Include="Source\Game\CollisionDetection.cpp" />
+    <ClCompile Include="Source\Game\EnemyAI.cpp" />
+    <ClCompile Include="Source\Game\GameAudio.cpp" />
+    <ClCompile Include="Source\Game\GameEvents.cpp" />
+    <ClCompile Include="Source\Game\GameInput.cpp" />
+    <ClCompile Include="Source\Game\GameLevel.cpp" />
+    <ClCompile Include="Source\Game\GameState.cpp" />
+    <ClCompile Include="Source\Game\HUD.cpp" />
+    <ClCompile Include="Source\Game\HUDs\FPSHUD.cpp" />
+    <ClCompile Include="Source\Game\HUDs\MainMenuHUD.cpp" />
+    <ClCompile Include="Source\Game\Level.cpp" />
+    <ClCompile Include="Source\Game\LevelGoal.cpp" />
+    <ClCompile Include="Source\Game\Levels\FPSLevel1.cpp" />
+    <ClCompile Include="Source\Game\Levels\FPSLevel2.cpp" />
+    <ClCompile Include="Source\Game\Levels\Level01.cpp" />
+    <ClCompile Include="Source\Game\Levels\MainMenuLevel.cpp" />
+    <ClCompile Include="Source\Game\Levitate.cpp" />
+    <ClCompile Include="Source\Game\World.cpp" />
+    <ClCompile Include="Source\Game\Physics.cpp" />
+    <ClCompile Include="Source\Input\Gamepad\GamepadManager.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Maths\Maths.cpp" />
+    <ClCompile Include="Source\Pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Source\Renderer\DrawItem.cpp" />
+    <ClCompile Include="Source\Renderer\Renderer.cpp" />
+    <ClCompile Include="Source\Window\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Audio\Audio.h" />
+    <ClInclude Include="Source\Audio\SoundSourceVoice.h" />
+    <ClInclude Include="Source\Binary\Binary.h" />
+    <ClInclude Include="Source\Binary\BinaryBuffer.h" />
+    <ClInclude Include="Source\Console.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\InputEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowClosedEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowDestroyedEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowEndMoveEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowEnterFullscreenEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowExitFullscreenEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowLostFocusEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowMaximizedEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowMinimizedEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowMoveEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowReceivedFocusEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowResizedEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventStructures\WindowRestoredEvent.h" />
+    <ClInclude Include="Source\EventSystem\EventSystem.h" />
+    <ClInclude Include="Source\Game\Billboard.h" />
+    <ClInclude Include="Source\Game\CollisionDetection.h" />
+    <ClInclude Include="Source\Game\Components\AABBCollisionComponent.h" />
+    <ClInclude Include="Source\Game\Components\BillboardComponent.h" />
+    <ClInclude Include="Source\Game\Components\EnemyAIComponent.h" />
+    <ClInclude Include="Source\Game\Components\LevitateComponent.h" />
+    <ClInclude Include="Source\Game\Components\RigidBodyComponent.h" />
+    <ClInclude Include="Source\Game\Components\SoundEmitter3DComponent.h" />
+    <ClInclude Include="Source\Game\Components\SphereCollisionComponent.h" />
+    <ClInclude Include="Source\Game\Components\StaticMeshComponent.h" />
+    <ClInclude Include="Source\Game\Components\TagComponent.h" />
+    <ClInclude Include="Source\Game\Components\TransformComponent.h" />
+    <ClInclude Include="Source\Game\EnemyAI.h" />
+    <ClInclude Include="Source\Game\HUDs\MainMenuHUD.h" />
+    <ClInclude Include="Source\Game\LevelGoal.h" />
+    <ClInclude Include="Source\Game\Entity.h" />
+    <ClInclude Include="Source\Game\GameAudio.h" />
+    <ClInclude Include="Source\Game\GameEvents.h" />
+    <ClInclude Include="Source\Game\GameInput.h" />
+    <ClInclude Include="Source\Game\GameLevel.h" />
+    <ClInclude Include="Source\Game\GameState.h" />
+    <ClInclude Include="Source\Game\Levels\FPSLevel1.h" />
+    <ClInclude Include="Source\Game\Levels\FPSLevel2.h" />
+    <ClInclude Include="Source\Game\Levels\MainMenuLevel.h" />
+    <ClInclude Include="Source\Game\Levitate.h" />
+    <ClInclude Include="Source\Game\Tags.h" />
+    <ClInclude Include="Source\Game\HUD.h" />
+    <ClInclude Include="Source\Game\HUDs\FPSHUD.h" />
+    <ClInclude Include="Source\Game\Level.h" />
+    <ClInclude Include="Source\Game\Levels\Level01.h" />
+    <ClInclude Include="Source\Game\Physics.h" />
+    <ClInclude Include="Source\Game\World.h" />
+    <ClInclude Include="Source\Input\Gamepad\GamepadManager.h" />
+    <ClInclude Include="Source\Input\Input.h" />
+    <ClInclude Include="Source\Input\InputCodes.h" />
+    <ClInclude Include="Source\Maths\Maths.h" />
+    <ClInclude Include="Source\Maths\Transform.h" />
+    <ClInclude Include="Source\Pch.h" />
+    <ClInclude Include="Source\Game\Components\CameraComponent.h" />
+    <ClInclude Include="Source\Renderer\CameraSettings.h" />
+    <ClInclude Include="Source\Renderer\DirectionalLight.h" />
+    <ClInclude Include="Source\Renderer\DrawItem.h" />
+    <ClInclude Include="Source\Renderer\Renderer.h" />
+    <ClInclude Include="Source\Renderer\stb_image.h" />
+    <ClInclude Include="Source\Renderer\Material.h" />
+    <ClInclude Include="Source\Renderer\Vertex1Pos.h" />
+    <ClInclude Include="Source\Renderer\Vertex1Pos1UV.h" />
+    <ClInclude Include="Source\Renderer\Vertex1Pos1UV1Norm.h" />
+    <ClInclude Include="Source\Window\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\CompileShaders.bat" />
+    <None Include="Shaders\FragmentShader.glsl" />
+    <None Include="Shaders\VertexShader.glsl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
